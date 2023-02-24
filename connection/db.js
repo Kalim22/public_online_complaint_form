@@ -4,7 +4,7 @@ require("dotenv").config({
   path: "./env/.env",
 });
 
-mongoose.connect(process.env.MONGODBURI, (err) => {
+mongoose.connect("mongodb://127.0.0.1:27017/", (err) => {
   if (err) {
     console.log("error is => ", err);
   }
