@@ -19,7 +19,7 @@ app.use("/", require("./routes/Authentication"));
 
 app.use("/", require("./routes/Profile"));
 
-const port = process.env.PORT;
+const port = process.env.PORT || 8000;
 app.listen(port, (err) => {
   if (err) {
     console.log(err);
