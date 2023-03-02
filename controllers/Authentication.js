@@ -24,7 +24,7 @@ const userRegisteration = async (req, res) => {
     const existingUser = await user.findOne({ email_phone: email_phone });
 
     if (!existingUser) {
-      const addUser = await new user({
+      const addUser = new user({
         name,
         email_phone,
         voterid,
@@ -94,11 +94,11 @@ const mlaRegistration = async (req, res) => {
     const existingMla = await mla.findOne({ governmentid: governmentid });
 
     if (!existingMla) {
-      const addMla = await new mla({
+      const addMla = new mla({
         name:
           name.trim().charAt(0).toUpperCase() +
           name.substring(1, name.length).toLowerCase().trim(),
-        governmentid: governmentid.trim().toUpperCase(),
+        governmentid: governmentid.toLowerCase().trim(),
         area,
         password,
         confirmpassword,
@@ -121,7 +121,7 @@ const mlaLogin = async (req, res) => {
 
   try {
     const existingMla = await mla.findOne({
-      governmentid: governmentid.trim().toUpperCase(),
+      governmentid: governmentid.toLowerCase().trim(),
     });
 
     if (existingMla) {

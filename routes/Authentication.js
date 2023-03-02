@@ -7,6 +7,7 @@ const {
   userRegisteration,
   mlaLogin,
   mlaRegistration,
+  addItem,
 } = require("../controllers/Authentication");
 
 route.post("/user-registration", userRegisteration);
