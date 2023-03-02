@@ -19,6 +19,10 @@ app.use("/", require("./routes/Authentication"));
 
 app.use("/", require("./routes/Profile"));
 
+app.get("/", (req, res) => {
+  res.send("Everything is working");
+});
+
 app.listen("8000", (err) => {
   if (err) {
     console.log(err);
