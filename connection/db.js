@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 //   path: "./env/.env",
 // });
 
-mongoose.connect("mongodb:/0.0.0.0:27017/", (err) => {
+mongoose.connect("mongodb://127.0.0.1:27017/", (err) => {
   if (err) {
     console.log("error is => ", err);
   }
