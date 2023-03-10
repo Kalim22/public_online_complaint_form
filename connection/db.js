@@ -4,7 +4,9 @@ const mongoose = require("mongoose");
 //   path: "./env/.env",
 // });
 
-mongoose.connect("mongodb://127.0.0.1:27017/", (err) => {
+let mongodburi = "mongodb+srv://studboy71:OctZ0aYdIEJRJXDl@cluster0.ems4s3o.mongodb.net/?retryWrites=true&w=majority"
+
+mongoose.connect(mongodburi, (err) => {
   if (err) {
     console.log("error is => ", err);
   }
