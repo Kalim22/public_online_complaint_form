@@ -9,7 +9,7 @@ require("dotenv").config({
 
 const app = express();
 app.use(cors({
-  origin: 'https://public-online-complaint-form-frontend.vercel.app/'
+  origin: '*'
 }));
 
 app.use(express.json());
