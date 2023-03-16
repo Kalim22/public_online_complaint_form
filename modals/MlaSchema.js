@@ -5,7 +5,7 @@ const mlaSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  governmentid: {
+  mlaId: {
     type: String,
     required: true,
   },
@@ -13,11 +13,11 @@ const mlaSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  password: {
+  partyName: {
     type: String,
-    required: true,
+    required: [true, 'party name must be required'],
   },
-  confirmpassword: {
+  password: {
     type: String,
     required: true,
   },

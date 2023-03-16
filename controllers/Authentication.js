@@ -75,54 +75,53 @@ const userLogin = async (req, res) => {
 };
 
 const mlaRegistration = async (req, res) => {
-  const { name, governmentid, area, password, confirmpassword } = req.body;
+  
+  const { name, mlaId, area, partyName, password } = req.body;
 
-  if (!(name && governmentid && area && password && confirmpassword)) {
+  if (!(name && mlaId && area && partyName && password)) {
     return res
       .status(400)
       .json({ errmsg: "Please fill all the fields!", status: "failed" });
   }
 
-  if (password !== confirmpassword) {
-    return res.status(400).json({
-      errMsg: "Password and confirm password can't be different",
-      status: "failed",
-    });
-  }
-
   try {
-    const existingMla = await mla.findOne({ governmentid: governmentid });
 
-    if (!existingMla) {
-      const addMla = new mla({
-        name:
-          name.trim().charAt(0).toUpperCase() +
-          name.substring(1, name.length).toLowerCase().trim(),
-        governmentid: governmentid.toLowerCase().trim(),
-        area,
-        password,
-        confirmpassword,
-      });
-      await addMla.save();
-      return res.status(201).json({
-        status: "success",
-      });
-    }
-    return res
+    const existingMla = await mla.findOne({ mlaId: mlaId });
+
+    if (existingMla) {
+      return res
       .status(400)
       .json({ errMsg: "Mla already exists!", status: "failed" });
+    }
+
+    const addMla = new mla({
+      name,
+      mlaId,
+      area,
+      partyName,
+      password,
+    });
+
+    await addMla.save();
+
+    return res.status(201).json({
+      status: "success",
+    });
+    
   } catch (error) {
     console.log("err is - >", error);
   }
 };
 
 const mlaLogin = async (req, res) => {
-  const { governmentid, password } = req.body;
+  const { mlaId, password } = req.body;
 
   try {
     const existingMla = await mla.findOne({
-      governmentid: governmentid.toLowerCase().trim(),
+      mlaId
     });
+
+    console.log(existingMla)
 
     if (existingMla) {
       if (existingMla.password === password) {
@@ -146,9 +145,19 @@ const mlaLogin = async (req, res) => {
   }
 };
 
+const mlaDetails = async (req, res) => {
+  try {
+    const allMlas = await mla.find({})
+    return res.status(200).json({allMlas})
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 module.exports = {
   userRegisteration,
   mlaRegistration,
   userLogin,
   mlaLogin,
+  mlaDetails
 };
