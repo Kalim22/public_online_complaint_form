@@ -7,7 +7,6 @@ const addRequest = async (req, res) => {
     userMobileNumber,
     voterIdNumber,
     area,
-    mlaName,
     complaintAbout,
     description,
   } = req.body;
@@ -18,7 +17,6 @@ const addRequest = async (req, res) => {
       userMobileNumber &&
       voterIdNumber &&
       area &&
-      mlaName &&
       complaintAbout &&
       description
     )
@@ -41,7 +39,6 @@ const addRequest = async (req, res) => {
       area:
         area.charAt(0).toUpperCase().trim() +
         area.substring(1, area.length).toLowerCase().trim(),
-      mlaName: mlaName.trim(),
       complaintAbout:
         complaintAbout.charAt(0).toUpperCase().trim() +
         complaintAbout.substring(1, complaintAbout.length).toLowerCase().trim(),
