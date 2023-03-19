@@ -75,7 +75,6 @@ const userLogin = async (req, res) => {
 };
 
 const mlaRegistration = async (req, res) => {
-  
   const { name, mlaId, area, partyName, password } = req.body;
 
   if (!(name && mlaId && area && partyName && password)) {
@@ -85,13 +84,12 @@ const mlaRegistration = async (req, res) => {
   }
 
   try {
-
     const existingMla = await mla.findOne({ mlaId: mlaId });
 
     if (existingMla) {
       return res
-      .status(400)
-      .json({ errMsg: "Mla already exists!", status: "failed" });
+        .status(400)
+        .json({ errMsg: "Mla already exists!", status: "failed" });
     }
 
     const addMla = new mla({
@@ -107,7 +105,6 @@ const mlaRegistration = async (req, res) => {
     return res.status(201).json({
       status: "success",
     });
-    
   } catch (error) {
     console.log("err is - >", error);
   }
@@ -118,10 +115,8 @@ const mlaLogin = async (req, res) => {
 
   try {
     const existingMla = await mla.findOne({
-      mlaId
+      mlaId,
     });
-
-    console.log(existingMla)
 
     if (existingMla) {
       if (existingMla.password === password) {
@@ -147,17 +142,17 @@ const mlaLogin = async (req, res) => {
 
 const mlaDetails = async (req, res) => {
   try {
-    const allMlas = await mla.find({})
-    return res.status(200).json({allMlas})
+    const allMlas = await mla.find({});
+    return res.status(200).json({ allMlas });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
 module.exports = {
   userRegisteration,
   mlaRegistration,
   userLogin,
   mlaLogin,
-  mlaDetails
+  mlaDetails,
 };
